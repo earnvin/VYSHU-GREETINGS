@@ -98,6 +98,44 @@
 
   <footer>Made with ❤️ by Vinay</footer>
 
+  <audio id="love" preload="auto">
+    <source id="musicsource"
+      src="" type="audio/mpeg">
+  </audio>
+  <button id="lovebtn">click for love</button>
+  <script>
+    const songs = [
+
+      ];
+    let currentsong = 0;
+    const audio = document,getElementById("love");
+    const source = document,getElementById("musicsource");
+    const btn = document,getElementById("lovebtn");
+
+    // Fade in effect
+    function fadeIn(audioElement) {
+      audioElement.volume = 0;
+      const fade = setinterval() => {
+        if(audioElement.volume <1) {
+          aduioElement.volume+=0.05;
+        } else {
+          clearInterval(fade);
+        }
+      },200);
+    }
+
+    // When the button clicked
+    btn.addEvenListener("click",()=>{
+      currentsong = (currentSong + 1) % songs.length;
+      source.src = songs[currentsong];
+      audio.load();
+      audio.play();
+      fadeIn(audio);
+      btn.textContent = playing song $(currentsong+1);
+    });
+  </script>
+          
+
   <script>
     function createHeart() {
       const heart = document.createElement('div');
@@ -119,3 +157,4 @@
   </script>
 </body>
 </html>
+
