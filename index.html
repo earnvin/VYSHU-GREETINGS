@@ -100,26 +100,27 @@
 
   <audio id="love" preload="auto">
     <source id="musicsource"
-      src="https://raw.githubusercontent.com/earnvin/VYSHU-GREETINGS/blob/af79fb2764ae4027afbb01feb742ffa0c189a4f6/WhatsApp%20Audio%202025-11-06%20at%2018.16.48_2af8c0f5.mp3" type="audio/mpeg">
+      src="https://raw.githubusercontent.com/earnvin/VYSHU-GREETINGS/blob/af79fb2764ae4027afbb01feb742ffa0c189a4f6/WhatsApp%20Audio%202025-11-06%20at%2018.16.48_2af8c0f5.mp3" 
+      type="audio/mpeg">
   </audio>
   <button id="lovebtn">click for love</button>
   <script>
     const songs = [
-      "https://raw.githubusercontent.com/earnvin/VYSHU-GREETINGS/blob/af79fb2764ae4027afbb01feb742ffa0c189a4f6/WhatsApp%20Audio%202025-11-06%20at%2018.16.48_2af8c0f5.mp3"
+      "https://raw.githubusercontent.com/earnvin/VYSHU-GREETINGS/blob/af79fb2764ae4027afbb01feb742ffa0c189a4f6/WhatsApp%20Audio%202025-11-06%20at%2018.16.48_2af8c0f5.mp3",
       "https://raw.githubusercontent.com/earnvin/VYSHU-GREETINGS/blob/121040e12ed1163bda49d2921de7df8d2d92a6ce/WhatsApp%20Audio%202025-11-06%20at%2018.16.52_5836e2d4.mp3"
 
       ];
     let currentsong = 0;
-    const audio = document,getElementById("love");
-    const source = document,getElementById("musicsource");
-    const btn = document,getElementById("lovebtn");
+    const audio = document.getElementById("love");
+    const source = document.getElementById("musicsource");
+    const btn = document.getElementById("lovebtn");
 
     // Fade in effect
     function fadeIn(audioElement) {
       audioElement.volume = 0;
-      const fade = setinterval() => {
+      const fade = setInterval() => {
         if(audioElement.volume <1) {
-          aduioElement.volume+=0.05;
+          audioElement.volume+=0.05;
         } else {
           clearInterval(fade);
         }
@@ -127,13 +128,13 @@
     }
 
     // When the button clicked
-    btn.addEvenListener("click",()=>{
+    btn.addEventListener("click",()=>{
       currentsong = (currentSong + 1) % songs.length;
       source.src = songs[currentsong];
       audio.load();
       audio.play();
       fadeIn(audio);
-      btn.textContent = playing song $(currentsong+1);
+      btn.textContent = 'playing song $(currentsong+1)';
     });
   </script>
           
@@ -159,6 +160,7 @@
   </script>
 </body>
 </html>
+
 
 
 
