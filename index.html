@@ -116,8 +116,9 @@
       position: fixed;
       top: 0;
       left: 0;
+      right: 0;
+      bottom: 0;
       width: 100%;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -128,6 +129,7 @@
       transform: translateX(0);
       transition: opacity 0.6s ease, transform 0.6s ease;
       z-index: 2;
+      overflow-y: auto;
     }
 
     #mainSection.hidden,
@@ -146,12 +148,37 @@
       display: none;
       opacity: 0;
       transform: translateX(40px);
-      background-image:
-        linear-gradient(rgba(120, 0, 60, 0.55), rgba(120, 0, 60, 0.55)),
-        url('WhatsApp Image 2026-07-29 at 7.09.24 PM (1).jpeg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+    }
+
+    /* ============================================================
+       PASTE THE WISHES-SECTION BACKGROUND IMAGE LINK BELOW
+       Replace the text WISHES_IMAGE_LINK_HERE with your image URL
+       ============================================================ */
+    #wishesSection {
+      background-image:
+        linear-gradient(rgba(120, 0, 60, 0.55), rgba(120, 0, 60, 0.55)),
+        url('WISHES_IMAGE_LINK_HERE');
+    }
+
+    /* ============================================================
+       PASTE THE MENTAL-SECTION BACKGROUND IMAGE LINK BELOW
+       Replace the text MENTAL_IMAGE_LINK_HERE with your image URL
+       ============================================================ */
+    #mentalSection {
+      background-image:
+        linear-gradient(rgba(120, 0, 60, 0.55), rgba(120, 0, 60, 0.55)),
+        url('MENTAL_IMAGE_LINK_HERE');
+    }
+
+    /* Long text in this section can overflow a vertically-centered flex
+       box (hiding the buttons above/below the viewport). Align to the
+       top instead so the buttons always end up reachable by scrolling. */
+    #mentalSection.visible {
+      justify-content: flex-start;
+      padding-top: 60px;
     }
 
     #wishesSection.visible,
@@ -211,7 +238,7 @@
     <div class="controls">
       <button onclick="showLove()">Birthday Wishes 💐</button>
       <button onclick="showMental()">Mental 🤪</button>
-      <button id="loveBtn">💖 Play Song 💖</button>
+      <button id="mainLoveBtn" onclick="playMain()">💖 Play Song 💖</button>
     </div>
 
     <div id="loveMessage">💗 You are loved endlessly 💗</div>
@@ -228,7 +255,7 @@
     </p>
 
     <div class="song-controls">
-      <button id="loveBtn2" onclick="loveBtn.click()">💖 Play Song 💖</button>
+      <button id="wishesLoveBtn" onclick="playWishes()">💖 Play Song 💖</button>
     </div>
 
     <button onclick="goBack()" style="margin-top: 30px;">← Back</button>
@@ -245,37 +272,68 @@
     </p>
    <div class="mental-controls" style="margin-top: 30px;">
       <button onclick="goBackFromMental()">← Back</button>
-      <button id="mentalLoveBtn" onclick="loveBtn.click()">💖 Play Song 💖</button>
+      <button id="mentalLoveBtn" onclick="playMental()">💖 Play Song 💖</button>
     </div>
   </section>
 
   <footer>Made with ❤️ by Vinay</footer>
 
-  <!-- Romantic background music -->
-  <audio id="loveMusic" preload="auto">
-    <source id="musicSource" src="https://raw.githubusercontent.com/earnvin/ANANYA-GREETING/main/song1.mp3" type="audio/mpeg">
+  <!-- ============================================================
+       MAIN SECTION SONG
+       Paste the main-page song link inside the src=" " below
+       ============================================================ -->
+  <audio id="mainMusic" preload="auto">
+    <source id="mainSource" src="MAIN_SECTION_SONG_LINK_HERE" type="audio/mpeg">
+  </audio>
+
+  <!-- ============================================================
+       BIRTHDAY WISHES SECTION SONG
+       Paste the wishes-page song link inside the src=" " below
+       ============================================================ -->
+  <audio id="wishesMusic" preload="auto">
+    <source id="wishesSource" src="WISHES_SECTION_SONG_LINK_HERE" type="audio/mpeg">
+  </audio>
+
+  <!-- ============================================================
+       MENTAL SECTION SONG
+       Paste the mental-page song link inside the src=" " below
+       ============================================================ -->
+  <audio id="mentalMusic" preload="auto">
+    <source id="mentalSource" src="MENTAL_SECTION_SONG_LINK_HERE" type="audio/mpeg">
   </audio>
 
   <script>
-    // ---- Song playlist ----
-    const songs = [
-      "https://raw.githubusercontent.com/earnvin/ANANYA-GREETING/daede84680b4450fe7fda6ce93506c9295283d7d/WhatsApp%20Audio%202025-11-06%20at%2018.16.52_5836e2d4.mp3",
-      "https://raw.githubusercontent.com/earnvin/ANANYA-GREETING/9865f639c405f588b11c5856dd458feb8e790f92/WhatsApp%20Audio%202025-11-06%20at%2018.16.48_2af8c0f5.mp3"
-    ];
+    const mainMusic = document.getElementById("mainMusic");
+    const wishesMusic = document.getElementById("wishesMusic");
+    const mentalMusic = document.getElementById("mentalMusic");
 
-    let currentSong = 0;
-    const audio = document.getElementById("loveMusic");
-    const source = document.getElementById("musicSource");
-    const loveBtn = document.getElementById("loveBtn");
+    function stopAllMusic() {
+      [mainMusic, wishesMusic, mentalMusic].forEach(a => {
+        a.pause();
+        a.currentTime = 0;
+      });
+    }
 
-    loveBtn.addEventListener("click", () => {
-      currentSong = (currentSong + 1) % songs.length;
-      source.src = songs[currentSong];
-      audio.load();
-      audio.play().catch(() => {
+    function playMain() {
+      stopAllMusic();
+      mainMusic.play().catch(() => {
         // Autoplay/format may be blocked by the browser; ignore silently.
       });
-    });
+    }
+
+    function playWishes() {
+      stopAllMusic();
+      wishesMusic.play().catch(() => {
+        // Autoplay/format may be blocked by the browser; ignore silently.
+      });
+    }
+
+    function playMental() {
+      stopAllMusic();
+      mentalMusic.play().catch(() => {
+        // Autoplay/format may be blocked by the browser; ignore silently.
+      });
+    }
 
     // ---- Floating hearts ----
     function createHeart() {
@@ -302,7 +360,7 @@
       setTimeout(() => cake.remove(), 8000);
     }
 
-    // Single interval for each effect (the duplicate/conflicting timers were removed)
+    // Single interval for each effect
     setInterval(createHeart, 400);
     setInterval(createCake, 800);
 
@@ -323,8 +381,8 @@
       mainSection.classList.add('hidden');
       wishesSection.classList.add('visible');
 
-      // Start the song immediately as the second page opens
-      loveBtn.click();
+      // Start the wishes-section song as the page opens
+      playWishes();
 
       setTimeout(() => {
         document.body.style.background = 'linear-gradient(135deg, #ff9a9e, #fad0c4)';
@@ -337,6 +395,7 @@
 
       wishesSection.classList.remove('visible');
       mainSection.classList.remove('hidden');
+      stopAllMusic();
     }
 
     // ---- Mental button page ----
@@ -358,6 +417,7 @@
 
       mentalSection.classList.remove('visible');
       mainSection.classList.remove('hidden');
+      stopAllMusic();
     }
   </script>
 </body>
