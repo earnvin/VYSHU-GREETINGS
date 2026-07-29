@@ -166,6 +166,7 @@ btn.addEventListener("click", () => {
     cake.style.left = Math.random() * 100 + 'vw';
     cake.style.fontSize = (1.5 + Math.random() * 1.5) + 'rem';
     cake.style.animationDuration = (4 + Math.random() * 3) + 's';
+    heart.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
     document.body.appendChild(cake);
     setTimeout(() => cake.remove(), 8000);
   }
