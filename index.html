@@ -111,7 +111,8 @@
     }
 
     #mainSection,
-    #wishesSection {
+    #wishesSection,
+    #mentalSection {
       position: fixed;
       top: 0;
       left: 0;
@@ -130,7 +131,8 @@
     }
 
     #mainSection.hidden,
-    #wishesSection.hidden {
+    #wishesSection.hidden,
+    #mentalSection.hidden {
       opacity: 0;
       pointer-events: none;
     }
@@ -139,7 +141,8 @@
       transform: translateX(-40px);
     }
 
-    #wishesSection {
+    #wishesSection,
+    #mentalSection {
       display: none;
       opacity: 0;
       transform: translateX(40px);
@@ -151,21 +154,24 @@
       background-repeat: no-repeat;
     }
 
-    #wishesSection.visible {
+    #wishesSection.visible,
+    #mentalSection.visible {
       display: flex;
       opacity: 1;
       transform: translateX(0);
       overflow-y: auto;
     }
 
-    #wishesSection h2 {
+    #wishesSection h2,
+    #mentalSection h2 {
       font-size: 2.8em;
       text-shadow: 2px 2px 14px rgba(255, 0, 100, 0.8), 0 0 25px rgba(255, 255, 255, 0.5);
       margin-bottom: 20px;
       animation: glow 2s ease-in-out infinite alternate;
     }
 
-    #wishesSection .love-note {
+    #wishesSection .love-note,
+    #mentalSection .love-note {
       font-size: 1.3em;
       max-width: 650px;
       line-height: 1.6;
@@ -204,6 +210,7 @@
 
     <div class="controls">
       <button onclick="showLove()">Birthday Wishes 💐</button>
+      <button onclick="showMental()">Mental 🤪</button>
       <button id="loveBtn">💖 Play Song 💖</button>
     </div>
 
@@ -221,10 +228,27 @@
     </p>
 
     <div class="song-controls">
-      <button id="loveBtn">💖 Play Song 💖</button>
+      <button id="loveBtn2" onclick="loveBtn.click()">💖 Play Song 💖</button>
     </div>
 
     <button onclick="goBack()" style="margin-top: 30px;">← Back</button>
+  </section>
+
+  <section id="mentalSection">
+    <h2>Mental Mokam Dhana</h2>
+
+    <p class="love-note">
+      mental dhana , yedava pandi kukka nakka ani ani nuvvey antav waste dhana song padu antay godava padinav waste ippudu ah song indulo petey vadini ga kinda song play ani click chey ni song play avuthadi adiga adiga ani waste ,... and ne nik wish cheyan aney ga ana nina cake cutting time ki chestha ana dunna . ayina andarilaga firsty first chesthay em click unthadi valu inka cake cutting anaru valu cheputhay ne first miss avutha andukey first wish or last wish untay special first enduku ley last wish chesthay na wish tho ni birthday end avuthundi and gurthuku undi pothadi last wish kabati ani different ga cheyali kab ati ila chesthuna . by the way song vasthunda . rakapothay chep mala cheyali usshhhh . 
+      any way elano ala chesina usshh nik nachuthadi aney anukunthuna next time first wish chestha ley jara cool avu uko uko sorry sorry sorry raaaa yedava nara yedavaaaaaaa........
+      <br><br>
+       Happy Birthday to the most wonderfully mental person I know! 
+      Hhehehee Happy birthday raa bangeeee.................🎉
+    </p>
+
+  <div class="mental-controls" style="margin-top: 30px;">
+      <button onclick="goBackFromMental()">← Back</button>
+      <button id="mentalLoveBtn" onclick="loveBtn.click()">💖 Play Song 💖</button>
+    </div>
   </section>
 
   <footer>Made with ❤️ by Vinay</footer>
@@ -253,7 +277,6 @@
       audio.play().catch(() => {
         // Autoplay/format may be blocked by the browser; ignore silently.
       });
-      loveBtn.textContent = `💞 Playing Song ${currentSong + 1} 💞`;
     });
 
     // ---- Floating hearts ----
@@ -315,6 +338,27 @@
       const wishesSection = document.getElementById('wishesSection');
 
       wishesSection.classList.remove('visible');
+      mainSection.classList.remove('hidden');
+    }
+
+    // ---- Mental button page ----
+    function showMental() {
+      const mainSection = document.getElementById('mainSection');
+      const mentalSection = document.getElementById('mentalSection');
+
+      for (let i = 0; i < 15; i++) {
+        setTimeout(createHeart, i * 150);
+      }
+
+      mainSection.classList.add('hidden');
+      mentalSection.classList.add('visible');
+    }
+
+    function goBackFromMental() {
+      const mainSection = document.getElementById('mainSection');
+      const mentalSection = document.getElementById('mentalSection');
+
+      mentalSection.classList.remove('visible');
       mainSection.classList.remove('hidden');
     }
   </script>
