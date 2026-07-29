@@ -162,7 +162,6 @@ btn.addEventListener("click", () => {
   function createCake() {
     const cake = document.createElement('div');
     cake.classList.add('cake');
-    cake.textContent = cakeEmojis[Math.floor(Math.random() * cakeEmojis.length)];
     cake.style.left = Math.random() * 100 + 'vw';
     cake.style.fontSize = (1.5 + Math.random() * 1.5) + 'rem';
     cake.style.animationDuration = (4 + Math.random() * 3) + 's';
